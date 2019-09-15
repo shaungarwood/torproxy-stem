@@ -24,6 +24,7 @@ headers = {
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.73.11 (KHTML, like Gecko) Version/7.0.1 Safari/537.73.11'
 }
 
+get_ip()
 get_ip(proxies, headers)
 for x in range(0,5):
     change_ip()
