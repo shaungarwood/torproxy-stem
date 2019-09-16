@@ -1,5 +1,6 @@
 from time import sleep
 
+from stem import Signal
 from stem.control import Controller
 from stem import SocketError
 from stem.connection import AuthenticationFailure

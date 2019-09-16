@@ -4,17 +4,13 @@ import requests
 from stem import Signal
 from stem.control import Controller
 
+import tor
+
 
 def get_ip(proxies=None, headers=None):
     r = requests.get("http://icanhazip.com", proxies=proxies, headers=headers)
     print (r.text)
 
-
-def change_ip():
-    with Controller.from_port(port = 9051) as controller:
-      controller.authenticate('password')
-      controller.signal(Signal.NEWNYM)
-    sleep(10)
 
 proxies = {
   "http": "http://127.0.0.1:8118"
@@ -27,5 +23,6 @@ headers = {
 get_ip()
 get_ip(proxies, headers)
 for x in range(0,5):
-    change_ip()
+    tor.change_ip()
+    sleep(10)
     get_ip(proxies, headers)
