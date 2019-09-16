@@ -12,22 +12,29 @@ def attempt_connect(password='password'):
 
     return response
 
+
 def is_ready(response):
     if "PROGRESS=100" in response:
         return True
     else:
         return False
 
-ready = False
-while not ready:
-    try:
-        response = attempt_connect
-        ready = is_ready(response)
-        print(response)
-        if ready:
-            print("READY!")
-        else:
+
+def sleep_until_ready():
+    ready = False
+    while not ready:
+        try:
+            response = attempt_connect()
+            ready = is_ready(response)
+            print(response)
+            if ready:
+                print("READY!")
+            else:
+                sleep(1)
+        except (SocketError, ConnectionRefusedError, AuthenticationFailure):
+            print("connection refused")
             sleep(1)
-    except (SocketError, ConnectionRefusedError, AuthenticationFailure):
-        print("connection refused")
-        sleep(1)
+
+
+if __name__ == "__main__":
+    sleep_until_ready()
