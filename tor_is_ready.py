@@ -4,9 +4,10 @@ from stem.control import Controller
 from stem import SocketError
 from stem.connection import AuthenticationFailure
 
-def attempt_connect(password='password'):
+
+def attempt_connect(password='password', port=9051):
     response = None
-    with Controller.from_port(port = 9051) as controller:
+    with Controller.from_port(port = port) as controller:
         controller.authenticate(password)
         response = controller.get_info("status/bootstrap-phase")
 
@@ -18,6 +19,12 @@ def is_ready(response):
         return True
     else:
         return False
+
+
+def change_ip(password='password', port=9051):
+    with Controller.from_port(port = port) as controller:
+      controller.authenticate(password)
+      controller.signal(Signal.NEWNYM)
 
 
 def sleep_until_ready():
