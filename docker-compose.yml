@@ -1,11 +1,10 @@
 version: '3'
 
 services:
+  redis:
+    image: redis:5-alpine
+
   torproxy:
     image: dperson/torproxy
     container_name: torproxy
-    ports:
-      - "8118:8118"
-      - "9050:9050"
-      - "127.0.0.1:9051:9051"
     command: "-p 'password'"
